@@ -45,6 +45,7 @@ export default function Navbar() {
 
   return (
     <header 
+      id="main-navbar"
       className={cn(
         "fixed w-full z-50 transition-all duration-700 ease-in-out",
         !isVisible && "translate-y-[-100%]",
@@ -61,14 +62,21 @@ export default function Navbar() {
             : "max-w-7xl px-4 py-4 bg-transparent"
         )}
       >
-        <Link 
-          href="/" 
-          className={cn(
-            "text-2xl font-headline tracking-tighter transition-colors duration-500",
+        <Link href="/" className="transition-all duration-500 flex items-center">
+          <img 
+            src="/assets/orovistaholidayslogo.png" 
+            alt="Orovista Holidays" 
+            className={cn(
+              "h-10 md:h-10 w-auto object-contain transition-all duration-500",
+              !isScrolled && "brightness-0 invert"
+            )}
+          />
+          <span className={cn(
+            "text-[18px] md:text-[22px] font-headline tracking-tighter transition-colors duration-500 leading-none",
             isScrolled ? "text-foreground" : "text-white"
-          )}
-        >
-          Orovista Holidays
+          )}>
+            Orovista Holidays
+          </span>
         </Link>
         
         <nav className="hidden md:flex items-center space-x-10 font-medium text-[11px] uppercase tracking-[0.15em]">

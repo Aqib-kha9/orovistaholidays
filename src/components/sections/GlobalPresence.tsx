@@ -69,7 +69,7 @@ export function GlobalPresence() {
                      </div>
 
                      <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-7">
-                        {["Vietnam", "Singapore", "Japan", "Dubai", "Oman", "Iraq"].map((loc, i) => (
+                        {["Vietnam", "Philippines", "Japan", "Dubai", "Oman", "Singapore"].map((loc, i) => (
                            <span
                               key={i}
                               onMouseEnter={() => setActiveQuery(loc)}
@@ -136,7 +136,7 @@ export function GlobalPresence() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-12 px-2">
                {[
                   { label: "European Axis", val: "Europe & Baku" },
-                  { label: "Eastern Pulse", val: "Vietnam & Japan" },
+                  { label: "Eastern Pulse", val: "Vietnam & Philippines" },
                   { label: "Gulf & Synergy", val: "Dubai & Oman" },
                   { label: "Himalayan Footprint", val: "Ladakh & Kashmir" }
                ].map((stat, i) => (

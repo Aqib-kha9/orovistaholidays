@@ -1,16 +1,16 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ShieldCheck, Headset, Map, Palmtree } from 'lucide-react';
+import { ShieldCheck, Headset, Map, Palmtree,ArrowUpRight } from 'lucide-react';
 
 const leftAdvantages = [
   {
-    icon: <Headset className="w-5 h-5 text-white" />,
+    icon: <Headset className="w-6 h-6" />,
     title: "24/7 Ground Sync",
     desc: "Dedicated on-ground teams in every timezone ensuring a seamless journey."
   },
   {
-    icon: <Palmtree className="w-5 h-5 text-white" />,
+    icon: <Palmtree className="w-6 h-6" />,
     title: "Handpicked Stays",
     desc: "Personally audited boutique villas and luxury chateaus for your comfort."
   }
@@ -18,12 +18,12 @@ const leftAdvantages = [
 
 const rightAdvantages = [
   {
-    icon: <Map className="w-5 h-5 text-white" />,
+    icon: <Map className="w-6 h-6" />,
     title: "Expert Local Guides",
     desc: "Connect with the soul of a destination through veteran storytellers."
   },
   {
-    icon: <ShieldCheck className="w-5 h-5 text-white" />,
+    icon: <ShieldCheck className="w-6 h-6" />,
     title: "Safety Protocols",
     desc: "Highest safety standards with comprehensive insurance and ground security."
   }
@@ -70,67 +70,69 @@ export function OrovistaAdvantage() {
           </div>
 
           {/* LEFT COLUMN CARDS */}
-          <div className="w-full lg:w-[30%] grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-6 md:gap-8 lg:gap-12">
+          <div className="w-full lg:w-[32%] grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-6 md:gap-8 lg:gap-10">
              {leftAdvantages.map((adv, i) => (
                <motion.div 
                  key={i}
-                 initial={{ opacity: 0, x: -30 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ delay: i * 0.1 }}
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.8, delay: i * 0.1 }}
                  viewport={{ once: true }}
-                 className="p-6 md:p-8 border border-black/[0.03] rounded-[2rem] md:rounded-[2.5rem] bg-neutral-50 hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group"
+                 className="group relative p-8 bg-white border border-black/5 rounded-[32px] hover:border-primary/30 transition-all duration-500 cursor-default"
                >
-                 <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform">
+                 <div className="w-10 h-10 mb-6 text-black group-hover:text-primary transition-colors duration-500">
                     {adv.icon}
                  </div>
-                 <h4 className="text-[20px] md:text-[24px] font-black text-black uppercase tracking-tighter mb-3 md:mb-4 leading-none">
+                 <h4 className="text-[20px] font-black text-black uppercase tracking-tight mb-3">
                     {adv.title}
                  </h4>
-                 <p className="text-[13px] md:text-[14px] text-black/40 font-medium leading-relaxed uppercase tracking-tight italic">
+                 <p className="text-[14px] text-black/40 font-medium leading-relaxed">
                     {adv.desc}
                  </p>
+                 <div className="absolute top-8 right-8 w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                </motion.div>
              ))}
           </div>
 
           {/* CENTER HERO IMAGE (Visible only on Desktop) */}
-          <div className="hidden lg:flex lg:w-[35%] justify-center">
+          <div className="hidden lg:flex lg:w-[30%] justify-center relative">
              <motion.div 
-               initial={{ opacity: 0, scale: 0.8 }}
+               initial={{ opacity: 0, scale: 0.95 }}
                whileInView={{ opacity: 1, scale: 1 }}
-               transition={{ duration: 1 }}
+               transition={{ duration: 1.2 }}
                viewport={{ once: true }}
-               className="relative w-full max-w-[450px]"
+               className="relative w-full max-w-[400px]"
              >
-                <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full filter" />
+                <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full filter" />
                 <img 
                   src="/assets/whyus.png" 
-                  className="relative z-10 w-full h-auto object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)]"
+                  className="relative z-10 w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.05)]"
                   alt="Premium Travel"
                 />
              </motion.div>
           </div>
 
           {/* RIGHT COLUMN CARDS */}
-          <div className="w-full lg:w-[30%] grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-6 md:gap-8 lg:gap-12">
+          <div className="w-full lg:w-[32%] grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-6 md:gap-8 lg:gap-10">
              {rightAdvantages.map((adv, i) => (
                <motion.div 
                  key={i}
-                 initial={{ opacity: 0, x: 30 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ delay: i * 0.1 }}
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.8, delay: i * 0.1 }}
                  viewport={{ once: true }}
-                 className="p-6 md:p-8 border border-black/[0.03] rounded-[2rem] md:rounded-[2.5rem] bg-neutral-50 hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group"
+                 className="group relative p-8 bg-white border border-black/5 rounded-[32px] hover:border-primary/30 transition-all duration-500 cursor-default"
                >
-                 <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform">
+                 <div className="w-10 h-10 mb-6 text-black group-hover:text-primary transition-colors duration-500">
                     {adv.icon}
                  </div>
-                 <h4 className="text-[20px] md:text-[24px] font-black text-black uppercase tracking-tighter mb-3 md:mb-4 leading-none">
+                 <h4 className="text-[20px] font-black text-black uppercase tracking-tight mb-3">
                     {adv.title}
                  </h4>
-                 <p className="text-[13px] md:text-[14px] text-black/40 font-medium leading-relaxed uppercase tracking-tight italic">
+                 <p className="text-[14px] text-black/40 font-medium leading-relaxed">
                     {adv.desc}
                  </p>
+                 <div className="absolute top-8 right-8 w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                </motion.div>
              ))}
           </div>

@@ -38,7 +38,7 @@ export function Destinations() {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
-              
+
               <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full">
                 <p className="font-bold text-xs text-white tracking-widest leading-none">{dest.price}</p>
               </div>
@@ -48,7 +48,7 @@ export function Destinations() {
                   <p className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-70 mb-1">{dest.location}</p>
                   <h3 className="font-headline text-2xl font-light leading-tight">{dest.title}</h3>
                 </div>
-                
+
                 <button className="w-full py-4 bg-white text-foreground rounded-full text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-primary hover:text-foreground">
                   Discover Now
                 </button>

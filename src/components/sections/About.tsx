@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export function About() {
   return (
-    <section id="about" className="w-full bg-white pb-32 overflow-hidden">
+    <section id="about" className="w-full bg-white pb-12 md:pb-32 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-3 md:px-3 lg:px-3">
         
         {/* Row 1: The Massive "ABOUT" Title */}
@@ -46,7 +46,7 @@ export function About() {
                 Luxurious Travel and <br /> Bespoke Journeys
               </p>
               <p className="text-[14px] md:text-[16px] text-black/60 font-medium leading-relaxed">
-                Modern Luxury: Curations featuring clean lines, neutral palettes, and high-quality experiences.
+                Modern Luxury: Curations featuring clean lines, neutral palettes, and high-quality experiences. Each journey is a bespoke masterpiece designed for those who seek the extraordinary.
               </p>
             </motion.div>
           </div>
@@ -58,13 +58,18 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[16/10] w-full rounded-[40px] md:rounded-[50px] overflow-hidden shadow-2xl shadow-black/5"
+              className="relative aspect-[16/10] w-full rounded-[40px] md:rounded-[50px] overflow-hidden shadow-2xl shadow-black/5 group"
             >
               <img 
-                src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1200" 
-                alt="Luxury Lifestyle" 
-                className="w-full h-full object-cover"
+                src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1200" 
+                alt="Soneva Jani, Maldives" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-6 left-8 md:bottom-10 md:left-12">
+                 <p className="text-white text-[10px] md:text-[12px] font-black uppercase tracking-[0.3em] drop-shadow-md">Exclusive Retreat</p>
+                 <h4 className="text-white text-[20px] md:text-[28px] font-bold tracking-tighter drop-shadow-md">Soneva Jani, Maldives</h4>
+              </div>
             </motion.div>
           </div>
 
@@ -77,12 +82,17 @@ export function About() {
               transition={{ duration: 1, delay: 0.4 }}
               className="flex flex-col gap-10"
             >
-              <div className="relative aspect-[16/10] w-full rounded-[32px] md:rounded-[40px] overflow-hidden shadow-xl shadow-black/5">
+              <div className="relative aspect-[16/10] w-full rounded-[32px] md:rounded-[40px] overflow-hidden shadow-xl shadow-black/5 group">
                 <img 
-                  src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800" 
-                  alt="Our Vision" 
-                  className="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800" 
+                  alt="Grace Hotel, Santorini" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-5 left-6">
+                   <p className="text-white text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] drop-shadow-md">Luxury Escape</p>
+                   <h4 className="text-white text-[16px] md:text-[20px] font-bold tracking-tighter drop-shadow-md">Grace Hotel, Santorini</h4>
+                </div>
               </div>
 
               <div className="space-y-6">

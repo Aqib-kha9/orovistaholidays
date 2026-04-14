@@ -22,16 +22,18 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-[24px] font-black text-black uppercase tracking-tighter">
-                Orovista<span className="text-primary">.</span>
-              </span>
+            <Link href="/" className="inline-block mb-6">
+              <img
+                src="/assets/orovistaholidayslogo.png"
+                alt="Orovista Holidays"
+                className="h-12 md:h-14 w-auto object-contain"
+              />
             </Link>
             <p className="text-[12px] text-black/40 font-semibold uppercase tracking-tight leading-relaxed mb-5 max-w-[220px]">
               Seamless travel across 34+ countries with local expertise.
             </p>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/917045546106"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-primary hover:text-black transition-all mb-5"
@@ -76,7 +78,7 @@ export default function Footer() {
           <div>
             <h5 className="text-[9px] font-black uppercase tracking-[0.4em] text-black/30 mb-4">Contact</h5>
             <ul className="space-y-2.5">
-              <li><a href="tel:+919876543210" className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">+91 98765 43210</a></li>
+              <li><a href="tel:+917045546106" className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">+91 70455 46106</a></li>
               <li><a href="mailto:hello@orovista.com" className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">hello@orovista.com</a></li>
             </ul>
             <div className="mt-6 space-y-2.5">

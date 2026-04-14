@@ -16,6 +16,7 @@ import { GlobalPresence } from "@/components/sections/GlobalPresence";
 import { OrovistaAdvantage } from "@/components/sections/OrovistaAdvantage";
 import { RealJourneys } from "@/components/sections/RealJourneys";
 import { FloatingCTA } from "@/components/sections/FloatingCTA";
+import { TrustBadges } from "@/components/sections/TrustBadges";
 
 export default function Home() {
   return (
@@ -27,10 +28,11 @@ export default function Home() {
         <About />
         <Team />
         <ServiceCategories />
+        
         <Packages />
-          <OrovistaAdvantage />
+        <OrovistaAdvantage />
         <GlobalPresence />
-      
+      <TrustBadges />
         <RealJourneys />
       
         <FAQ />

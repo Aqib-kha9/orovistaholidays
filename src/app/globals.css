@@ -9,8 +9,8 @@
   --font-headline: var(--font-playfair);
   --font-body: var(--font-plus-jakarta-sans);
   
-  --color-primary: #8dd6d6;
-  --color-primary-container: #bde0e0;
+  --color-primary: #bca37f;
+  --color-primary-container: #d1b99a;
   --color-on-primary: #1e2836;
   
   --color-secondary: #dce2e5;
@@ -43,7 +43,7 @@
 :root {
   --background: #ffffff;
   --foreground: #1e2836;
-  --primary: #8dd6d6;
+  --primary: #bca37f;
   --primary-foreground: #1e2836;
   --border: #dce2e5;
 }
@@ -51,7 +51,7 @@
 .dark {
   --background: #1e2836;
   --foreground: #dce2e5;
-  --primary: #8dd6d6;
+  --primary: #bca37f;
   --primary-foreground: #1e2836;
   --border: #4d5c6c;
 }

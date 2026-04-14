@@ -71,16 +71,16 @@ const categories = [
   {
     id: "03",
     title: "Corporate",
-    description: "Top-quality trips for companies. We handle office meetings, team events, and rewarding tours for your staff.",
+    description: "10+ Years of B2B Excellence. We handle high-stakes office meetings, team events, and rewarding tours with architectural precision.",
     image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800",
     color: "bg-white",
     span: "md:col-span-4",
     details: {
-      headline: "Inspire Your Human Capital.",
+      headline: "10 Years of B2B Mastery.",
       philosophy: "Corporate travel shouldn't be a chore. We turn MICE into 'Experiences' that drive loyalty, team synergy, and results.",
       quote: "The best ideas are often born 30,000 miles away from the boardroom.",
       features: [
-        { title: "End-to-End MICE", desc: "Meetings, Incentives, Conferences, and Events managed with surgical precision." },
+        { title: "10yr B2B Track Record", desc: "A decade of serving Fortune 500 companies with zero-error logistics." },
         { icon: <Globe />, title: "Global Scale", desc: "Whether it's a 20-person offsite or a 500-person summit, we scale perfectly." },
         { icon: <CheckCircle2 />, title: "GST & Tax Logic", desc: "Perfect corporate billing, international tax compliance, and transparent reporting." },
         { icon: <Zap />, title: "Branded Experiences", desc: "We integrate your brand identity into every touchpoint of the journey." }
