@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Edit, Trash2, MapPin, Clock, Loader2, LogOut, MessageSquare, Map as MapIcon, BookOpen, Star, Image as ImageIcon, Video } from 'lucide-react';
+import { Plus, Edit, Trash2, MapPin, Clock, Loader2, LogOut, MessageSquare, Map as MapIcon, BookOpen, Star, Image as ImageIcon, Video, Key } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { signOut } from 'next-auth/react';
 
@@ -39,7 +39,13 @@ export default function AdminDashboard() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [gallery, setGallery] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
+  
+  // Password Change State
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
   useEffect(() => {
     fetchData();
   }, []);
@@ -85,6 +91,50 @@ export default function AdminDashboard() {
     }
   };
 
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordError('');
+    setPasswordSuccess(false);
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordError("New passwords do not match.");
+      return;
+    }
+
+    if (passwordData.newPassword.length < 6) {
+      setPasswordError("New password must be at least 6 characters long.");
+      return;
+    }
+
+    setPasswordLoading(true);
+    try {
+      const res = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword: passwordData.currentPassword,
+          newPassword: passwordData.newPassword,
+        }),
+      });
+      
+      const data = await res.json();
+      if (!res.ok) {
+        setPasswordError(data.error || 'Failed to change password.');
+      } else {
+        setPasswordSuccess(true);
+        setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+        setTimeout(() => {
+          setIsPasswordModalOpen(false);
+          setPasswordSuccess(false);
+        }, 2000);
+      }
+    } catch (error) {
+      setPasswordError('An error occurred. Please try again.');
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
@@ -104,25 +154,25 @@ export default function AdminDashboard() {
             <div className="flex flex-wrap gap-6 mt-8">
               <button 
                 onClick={() => setActiveTab('packages')}
-                className={`flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'packages' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
+                className={`cursor-pointer flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'packages' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
               >
                 <MapIcon className="w-4 h-4" /> Journeys
               </button>
               <button 
                 onClick={() => setActiveTab('stories')}
-                className={`flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'stories' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
+                className={`cursor-pointer flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'stories' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
               >
                 <MessageSquare className="w-4 h-4" /> Real Stories
               </button>
               <button 
                 onClick={() => setActiveTab('blogs')}
-                className={`flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'blogs' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
+                className={`cursor-pointer flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'blogs' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
               >
                 <BookOpen className="w-4 h-4" /> Journal
               </button>
               <button 
                 onClick={() => setActiveTab('gallery')}
-                className={`flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'gallery' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
+                className={`cursor-pointer flex items-center gap-3 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'gallery' ? 'text-black' : 'text-black/20 hover:text-black/40'}`}
               >
                 <ImageIcon className="w-4 h-4" /> Gallery
               </button>
@@ -131,8 +181,16 @@ export default function AdminDashboard() {
           
           <div className="flex items-center gap-4">
             <button
+               onClick={() => setIsPasswordModalOpen(true)}
+               className="cursor-pointer p-4 bg-white rounded-full text-black hover:bg-neutral-100 transition-all shadow-sm border border-black/5"
+               title="Change Password"
+            >
+               <Key className="w-5 h-5" />
+            </button>
+            <button
                onClick={() => signOut({ callbackUrl: '/login' })}
-               className="p-4 bg-white rounded-full text-black hover:bg-red-500 hover:text-white transition-all shadow-sm border border-black/5"
+               className="cursor-pointer p-4 bg-white rounded-full text-black hover:bg-red-500 hover:text-white transition-all shadow-sm border border-black/5"
+               title="Logout"
             >
                <LogOut className="w-5 h-5" />
             </button>
@@ -156,7 +214,7 @@ export default function AdminDashboard() {
                       <Link href={`/admin/edit/${pkg._id}`} className="p-3 bg-white/90 backdrop-blur-sm rounded-full text-black hover:bg-black hover:text-white transition-all shadow-lg">
                         <Edit className="w-4 h-4" />
                       </Link>
-                      <button onClick={() => deleteItem(pkg._id, 'packages')} className="p-3 bg-white/90 backdrop-blur-sm rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg">
+                      <button onClick={() => deleteItem(pkg._id, 'packages')} className="cursor-pointer p-3 bg-white/90 backdrop-blur-sm rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -190,7 +248,7 @@ export default function AdminDashboard() {
                     <Link href={`/admin/stories/edit/${story._id}`} className="p-3 bg-[#f8f6f4] rounded-full text-black hover:bg-black hover:text-white transition-all">
                       <Edit className="w-4 h-4" />
                     </Link>
-                    <button onClick={() => deleteItem(story._id, 'stories')} className="p-3 bg-[#f8f6f4] rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all">
+                    <button onClick={() => deleteItem(story._id, 'stories')} className="cursor-pointer p-3 bg-[#f8f6f4] rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all">
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
@@ -207,7 +265,7 @@ export default function AdminDashboard() {
                       {item.type === 'video' ? <Video className="w-4 h-4" /> : <ImageIcon className="w-4 h-4" />}
                     </div>
                     <div className="absolute top-4 right-4 flex gap-2">
-                      <button onClick={() => deleteItem(item._id, 'gallery')} className="p-3 bg-white/90 backdrop-blur-sm rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg">
+                      <button onClick={() => deleteItem(item._id, 'gallery')} className="cursor-pointer p-3 bg-white/90 backdrop-blur-sm rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -235,7 +293,7 @@ export default function AdminDashboard() {
                       <Link href={`/admin/blogs/edit/${blog._id}`} className="p-3 bg-white/90 backdrop-blur-sm rounded-full text-black hover:bg-black hover:text-white transition-all shadow-lg">
                         <Edit className="w-4 h-4" />
                       </Link>
-                      <button onClick={() => deleteItem(blog._id, 'blogs')} className="p-3 bg-white/90 backdrop-blur-sm rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg">
+                      <button onClick={() => deleteItem(blog._id, 'blogs')} className="cursor-pointer p-3 bg-white/90 backdrop-blur-sm rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-lg">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -250,6 +308,83 @@ export default function AdminDashboard() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Password Change Modal */}
+      {isPasswordModalOpen && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-[32px] p-8 w-full max-w-md shadow-2xl relative"
+          >
+            <button 
+              onClick={() => setIsPasswordModalOpen(false)}
+              className="cursor-pointer absolute top-6 right-6 text-black/40 hover:text-black transition-colors"
+            >
+              <Trash2 className="w-5 h-5 opacity-0" /> {/* Just for spacing or use a real X icon if imported */}
+              <span className="font-bold text-xl leading-none">&times;</span>
+            </button>
+            
+            <h2 className="text-[24px] font-black uppercase tracking-tighter mb-6">Change Password</h2>
+            
+            {passwordSuccess ? (
+              <div className="bg-green-50 text-green-600 p-4 rounded-2xl text-sm font-bold text-center">
+                Password updated successfully!
+              </div>
+            ) : (
+              <form onSubmit={handlePasswordChange} className="space-y-4">
+                {passwordError && (
+                  <div className="bg-red-50 text-red-500 p-3 rounded-xl text-[12px] font-bold">
+                    {passwordError}
+                  </div>
+                )}
+                
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">Current Password</label>
+                  <input
+                    type="password"
+                    required
+                    value={passwordData.currentPassword}
+                    onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                    className="w-full bg-[#f8f6f4] px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-black/5 transition-all text-sm font-medium"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">New Password</label>
+                  <input
+                    type="password"
+                    required
+                    value={passwordData.newPassword}
+                    onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                    className="w-full bg-[#f8f6f4] px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-black/5 transition-all text-sm font-medium"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">Confirm New Password</label>
+                  <input
+                    type="password"
+                    required
+                    value={passwordData.confirmPassword}
+                    onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                    className="w-full bg-[#f8f6f4] px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-black/5 transition-all text-sm font-medium"
+                  />
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={passwordLoading}
+                  className="cursor-pointer w-full bg-black text-white py-4 rounded-full font-black uppercase tracking-widest text-[11px] hover:bg-neutral-800 transition-all disabled:opacity-50 mt-4 flex justify-center items-center gap-2"
+                >
+                  {passwordLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Update Password'}
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      )}
+
     </div>
   );
 }

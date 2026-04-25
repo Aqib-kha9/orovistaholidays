@@ -35,7 +35,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full bg-white py-10 md:py-20 font-sans overflow-hidden">
+    <section id="faq" className="w-full bg-white py-10 md:py-20 font-sans overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-3 md:px-3 lg:px-3">
 
         {/* Header */}

@@ -9,16 +9,21 @@ export function Team() {
         
         {/* --- DESKTOP LAYOUT (Hidden on Mobile) --- */}
         <div className="hidden md:flex relative bg-[#eeeae7] rounded-[35px] px-16 pt-10 flex-row items-end justify-between overflow-hidden">
-          {/* Left Principal */}
-          <div className="relative z-10 w-[28%] flex flex-col -ml-10">
+          {/* Left Principal - Vision Block to fill space */}
+          <div className="relative z-10 w-[28%] flex flex-col -ml-10 mb-20 self-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[1/1.2] w-full"
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-start"
             >
-              <img src="/assets/cofounder.png" alt="Zainab Ali Hussain" className="w-full h-full object-cover object-top mix-blend-multiply grayscale-[0.2]" />
+              <div className="h-20 w-[1px] bg-black/10 mb-6 ml-1"></div>
+              <span className="text-[10px] font-bold text-black/30 tracking-[0.4em] uppercase mb-4">Our Vision</span>
+              <h3 className="text-[28px] font-serif italic text-black/60 leading-tight max-w-[240px]">
+                "Crafting journeys that transcend the ordinary."
+              </h3>
+              <p className="mt-6 text-[11px] font-medium text-black/40 tracking-wider uppercase">Elite Traveler Excellence</p>
             </motion.div>
           </div>
 
@@ -53,15 +58,15 @@ export function Team() {
           </div>
 
           {/* Right Principal */}
-          <div className="relative z-10 w-[28%] flex flex-col -mr-10">
+          <div className="relative z-10 w-[28%] flex flex-col -mr-10 mb-8">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[1/1.2] w-full"
+              className="relative aspect-[1/1.1] w-full rounded-[40px] overflow-hidden shadow-2xl border-4 border-white/20"
             >
-              <img src="/assets/founder.png" alt="Aafaque Shaikh" className="w-full h-full object-cover object-top mix-blend-multiply grayscale-[0.2]" />
+              <img src="/assets/ceo_image.jpeg" alt="Aafaque Shaikh" className="w-full h-full object-cover object-center" />
             </motion.div>
           </div>
         </div>
@@ -88,13 +93,10 @@ export function Team() {
 
            {/* Principal 1: Zainab Ali Hussain */}
            <div className="group">
-              <div className="bg-[#eeeae7] rounded-[35px] overflow-hidden pt-8 px-4 flex flex-col items-center">
-                 <div className="text-center mb-6">
+              <div className="bg-[#eeeae7] rounded-[35px] overflow-hidden py-10 px-4 flex flex-col items-center">
+                 <div className="text-center">
                     <h4 className="text-[34px] font-black text-black tracking-tighter uppercase leading-none">Zainab Ali Hussain</h4>
                     <p className="text-[10px] font-bold text-black/40 tracking-[0.15em] uppercase mt-2">Co-Founder</p>
-                 </div>
-                 <div className="w-[85%] relative">
-                    <img src="/assets/cofounder.png" alt="Zainab Ali Hussain" className="w-full h-auto object-cover object-top mix-blend-multiply grayscale-[0.2]" />
                  </div>
               </div>
            </div>
@@ -106,8 +108,8 @@ export function Team() {
                     <h4 className="text-[34px] font-black text-black tracking-tighter uppercase leading-none">Aafaque Shaikh</h4>
                     <p className="text-[10px] font-bold text-black/40 tracking-[0.15em] uppercase mt-2">Ceo and founder</p>
                  </div>
-                 <div className="w-[85%] relative">
-                    <img src="/assets/founder.png" alt="Aafaque Shaikh" className="w-full h-auto object-cover object-top mix-blend-multiply grayscale-[0.2]" />
+                 <div className="w-full aspect-square relative rounded-[30px] overflow-hidden shadow-xl">
+                    <img src="/assets/ceo_image.jpeg" alt="Aafaque Shaikh" className="w-full h-full object-cover object-center" />
                  </div>
               </div>
            </div>

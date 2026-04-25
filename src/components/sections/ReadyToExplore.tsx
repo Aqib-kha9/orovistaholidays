@@ -6,12 +6,35 @@ import { MessageCircle, Send } from "lucide-react";
 export function ReadyToExplore() {
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setPhone("");
-    setTimeout(() => setSent(false), 4000);
+    if (!phone) return;
+
+    setLoading(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phone }),
+      });
+
+      if (response.ok) {
+        setSent(true);
+        setPhone("");
+        setTimeout(() => setSent(false), 4000);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -61,9 +84,10 @@ export function ReadyToExplore() {
                   />
                   <button
                     type="submit"
-                    className="bg-white text-black px-6 py-2.5 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-primary transition-all shrink-0"
+                    disabled={loading}
+                    className="bg-white text-black px-6 py-2.5 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-primary transition-all shrink-0 disabled:opacity-70"
                   >
-                    Get Called
+                    {loading ? "Sending..." : "Get Called"}
                   </button>
                 </form>
               )}

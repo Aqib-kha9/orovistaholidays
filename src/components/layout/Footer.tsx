@@ -58,9 +58,16 @@ export default function Footer() {
           <div>
             <h5 className="text-[9px] font-black uppercase tracking-[0.4em] text-black/30 mb-4">Destinations</h5>
             <ul className="space-y-2.5">
-              {["Europe & Baku", "Vietnam & Laos", "Dubai & Oman", "Ladakh & Kashmir", "Nepal & Sikkim", "Andaman & Manali"].map((d, i) => (
+              {[
+                { name: "Europe & Baku", href: "#experiences" },
+                { name: "Vietnam & Laos", href: "#experiences" },
+                { name: "Dubai & Oman", href: "#experiences" },
+                { name: "Ladakh & Kashmir", href: "#experiences" },
+                { name: "Nepal & Sikkim", href: "#experiences" },
+                { name: "Andaman & Manali", href: "#experiences" }
+              ].map((d, i) => (
                 <li key={i}>
-                  <Link href="#" className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">{d}</Link>
+                  <Link href={d.href} className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">{d.name}</Link>
                 </li>
               ))}
             </ul>
@@ -70,9 +77,15 @@ export default function Footer() {
           <div>
             <h5 className="text-[9px] font-black uppercase tracking-[0.4em] text-black/30 mb-4">Company</h5>
             <ul className="space-y-2.5">
-              {["About Us", "Our Team", "Packages", "Blog", "FAQs"].map((c, i) => (
+              {[
+                { name: "About Us", href: "#about" },
+                { name: "Our Team", href: "#team" },
+                { name: "Packages", href: "#packages" },
+                { name: "Blog", href: "#journal" },
+                { name: "FAQs", href: "#faq" }
+              ].map((c, i) => (
                 <li key={i}>
-                  <Link href="#" className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">{c}</Link>
+                  <Link href={c.href} className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">{c.name}</Link>
                 </li>
               ))}
             </ul>
@@ -89,8 +102,11 @@ export default function Footer() {
               </li>
             </ul>
             <div className="mt-6 space-y-2.5">
-              {["Privacy Policy", "Terms of Service"].map((s, i) => (
-                <div key={i}><Link href="#" className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">{s}</Link></div>
+              {[
+                { name: "Privacy Policy", href: "/privacy-policy" },
+                { name: "Terms of Service", href: "/terms-of-service" }
+              ].map((s, i) => (
+                <div key={i}><Link href={s.href} className="text-[12px] font-semibold text-black/40 hover:text-black uppercase tracking-tight transition-colors">{s.name}</Link></div>
               ))}
             </div>
           </div>
@@ -103,8 +119,12 @@ export default function Footer() {
             © 2025 Orovista Holidays. All Rights Reserved.
           </p>
           <div className="flex items-center gap-6">
-            {["Privacy", "Terms", "Cookies"].map((item, i) => (
-              <Link key={i} href="#" className="text-[10px] font-black uppercase tracking-widest text-black/25 hover:text-black/60 transition-colors">{item}</Link>
+            {[
+              { name: "Privacy", href: "/privacy-policy" },
+              { name: "Terms", href: "/terms-of-service" },
+              { name: "Cookies", href: "/privacy-policy" }
+            ].map((item, i) => (
+              <Link key={i} href={item.href} className="text-[10px] font-black uppercase tracking-widest text-black/25 hover:text-black/60 transition-colors">{item.name}</Link>
             ))}
             <span className="w-px h-3 bg-black/15" />
             <a
